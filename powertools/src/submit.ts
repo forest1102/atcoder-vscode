@@ -13,7 +13,7 @@ export const execute = async (args: any) => {
     if (!filename)
       throw new Error('File not specified')
     const parsedPath = path.parse(filename)
-    const cmdStr=args.replaceValues(toCmdParam(args.options?.params||{}))
+    const cmdStr=args.replaceValues(args.options?.params?.join(' '))
     
     const terminal =
       vscode.window.terminals.find(t=>t.name==='atcoder')||

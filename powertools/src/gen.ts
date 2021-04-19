@@ -11,7 +11,7 @@ export const execute = async (args: any) => {
     if(!input) return 
     const param=args.options?.params||{}
     const dir=path.join(__dirname,'../')
-    const cmdStr=args.replaceValues(toCmdParam(param))
+    const cmdStr=args.replaceValues(args.options?.params?.join(' '))
     
     const terminal =
       vscode.window.terminals.find(t=>t.name==='atcoder')||

@@ -13,9 +13,7 @@
         "name": "atcoder.gen",
         "script": "../powertools/lib/gen.js",
         "options": {
-          "params": {
-            "workspace": "${workspaceRoot}"
-          }
+          "params": ["--workspace ${workspaceRoot}"]
         }
       },
       "atcoder.test": {
@@ -32,7 +30,8 @@
         "forFile": true,
         "ifFile": true,
         "options": {
-          "compiler": "g++ -std=c++17 -fsanitize=address -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC ${activeFile}"
+          "compiler": "g++ -std=c++17 -fsanitize=address -D_GLIBCXX_DEBUG -D_GLIBCXX_DEBUG_PEDANTIC ${activeFile}",
+          "params": ["-u"]
         }
       }
     },
