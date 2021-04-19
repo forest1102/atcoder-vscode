@@ -2,7 +2,7 @@
   "configurations": [
     {
       "name": "Mac",
-      "includePath": ["/usr/local/include/**"],
+      "includePath": ["/usr/local/include/**", "./ac-library/**"],
       "defines": [],
       "macFrameworkPath": [],
       "compilerPath": "/usr/bin/g++",
