@@ -10,8 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = void 0;
+const util_1 = require("./util");
 const execute = (args) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     const vscode = args.require('vscode');
     const path = args.require('path');
     try {
@@ -23,13 +24,14 @@ const execute = (args) => __awaiter(void 0, void 0, void 0, function* () {
         if (!filename)
             throw new Error('File not specified');
         const parsedPath = path.parse(filename);
+        const cmdParam = args.replaceValues(util_1.toCmdParam(((_b = args.options) === null || _b === void 0 ? void 0 : _b.params) || {}));
         const terminal = vscode.window.terminals.find(t => t.name === 'atcoder') ||
             vscode.window.createTerminal({
                 name: 'atcoder'
             });
         terminal.show(true);
         terminal.sendText(`cd ${parsedPath.dir}`);
-        terminal.sendText(compiler + '&& atcoder-tools test');
+        terminal.sendText(compiler + '&& atcoder-tools test ' + cmdParam);
     }
     catch (e) {
         vscode.window.showErrorMessage(e.message || JSON.stringify(e));

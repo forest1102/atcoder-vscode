@@ -12,29 +12,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.execute = void 0;
 const util_1 = require("./util");
 const execute = (args) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a, _b;
+    var _a;
     const vscode = args.require('vscode');
     const path = args.require('path');
     try {
-        const filename = args.file
-            ? vscode.Uri.parse(args.file).path
-            : (_a = vscode.window.activeTextEditor) === null || _a === void 0 ? void 0 : _a.document.fileName;
-        if (!filename)
-            return;
         const input = yield vscode.window.showInputBox({
             placeHolder: 'enter atcoder contest id'
         });
         if (!input)
             return;
-        const param = ((_b = args.options) === null || _b === void 0 ? void 0 : _b.params) || { config: '../atcodertools.toml' };
-        if (param === null || param === void 0 ? void 0 : param.config)
-            param.config = path.join(__dirname, param.config);
+        const param = ((_a = args.options) === null || _a === void 0 ? void 0 : _a.params) || {};
+        const dir = path.join(__dirname, '../');
+        const cmdStr = args.replaceValues(util_1.toCmdParam(param));
         const terminal = vscode.window.terminals.find(t => t.name === 'atcoder') ||
             vscode.window.createTerminal({
                 name: 'atcoder'
             });
         terminal.show(true);
-        terminal.sendText(`atcoder-tools gen ${util_1.toCmdParam(param)} ${input}`);
+        terminal.sendText(`cd ${dir} &&atcoder-tools gen ${cmdStr} ${input}`);
     }
     catch (e) {
         vscode.window.showErrorMessage(e);

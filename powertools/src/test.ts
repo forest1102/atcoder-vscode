@@ -13,6 +13,7 @@ export const execute = async (args: any) => {
     if (!filename)
       throw new Error('File not specified')
     const parsedPath = path.parse(filename)
+    const cmdParam=args.replaceValues(toCmdParam(args.options?.params||{}))
     
     const terminal =
       vscode.window.terminals.find(t=>t.name==='atcoder')||
@@ -21,7 +22,7 @@ export const execute = async (args: any) => {
       })
     terminal.show(true)
     terminal.sendText(`cd ${parsedPath.dir}`)
-    terminal.sendText(compiler+'&& atcoder-tools test')
+    terminal.sendText(compiler+'&& atcoder-tools test '+cmdParam)
   } catch (e) {
     vscode.window.showErrorMessage(e.message||JSON.stringify(e))
   }

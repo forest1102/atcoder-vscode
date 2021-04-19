@@ -2,11 +2,7 @@
   "configurations": [
     {
       "name": "Mac",
-      "includePath": [
-        "/usr/local/include/**",
-        "${workspaceFolder}/utils",
-        "./ac-library/**"
-      ],
+      "includePath": ["/usr/local/include/**"],
       "defines": [],
       "macFrameworkPath": [],
       "compilerPath": "/usr/bin/g++",
